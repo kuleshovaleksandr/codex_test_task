@@ -2,23 +2,18 @@ package com.codex.test_task.entity;
 
 import com.codex.test_task.model.UserType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.UUID;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 @Data
 @NoArgsConstructor
-public class User {
-
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
+@EqualsAndHashCode(callSuper = true)
+public class User extends AbstractEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
