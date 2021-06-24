@@ -1,6 +1,6 @@
 package com.codex.test_task.entity;
 
-import com.codex.test_task.model.UserType;
+import com.codex.test_task.model.UserRole;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ public class User extends AbstractEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private UserType type;
+    private UserRole type;
 
     @Column
     private String name;

@@ -1,6 +1,6 @@
 package com.codex.test_task.model;
 
-public enum UserType {
+public enum UserRole {
     USER,
     ADMIN
 }
