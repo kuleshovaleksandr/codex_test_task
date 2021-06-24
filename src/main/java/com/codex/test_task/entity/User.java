@@ -17,7 +17,7 @@ public class User extends AbstractEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private UserRole type;
+    private UserRole role;
 
     @Column
     private String name;
