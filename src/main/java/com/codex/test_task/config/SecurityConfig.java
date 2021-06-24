@@ -1,7 +1,9 @@
 package com.codex.test_task.config;
 
+import com.codex.test_task.model.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,7 +19,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers(HttpMethod.GET, "/items/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+                .antMatchers(HttpMethod.POST, "/items/**").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.PUT, "/items/**").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE, "/items/**").hasRole(Role.ADMIN.name())
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic();
     }
 
     @Bean
@@ -27,7 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 User.builder()
                         .username("admin")
                         .password(passwordEncoder().encode("admin"))
-                        .roles("ADMIN")
+                        .roles(Role.ADMIN.name())
+                        .build(),
+                User.builder()
+                        .username("user")
+                        .password(passwordEncoder().encode("user"))
+                        .roles(Role.USER.name())
                         .build());
     }
 
