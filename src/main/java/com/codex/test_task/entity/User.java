@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -28,4 +29,10 @@ public class User extends AbstractEntity {
     @Column
     @Email
     private String email;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="bag",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name="item_id"))
+    private List<Item> items;
 }

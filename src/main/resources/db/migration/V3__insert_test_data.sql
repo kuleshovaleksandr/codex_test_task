@@ -72,3 +72,10 @@ insert into users
 values ('8ba50dc4-a79f-11eb-bcbc-0242ac130004', 'admin1', '111', 'admin1@gmail.com', 'ADMIN');
 insert into users
 values ('8ba50dc4-a79f-11eb-bcbc-0242ac130005', 'admin2', '111', 'admin2@gmail.com', 'ADMIN');
+
+insert into bag
+values ('8ba50dc4-a79f-11eb-bcbc-0242ac130001', '602f347c-a79e-11eb-bcbc-0242ac130001');
+insert into bag
+values ('8ba50dc4-a79f-11eb-bcbc-0242ac130001', '602f347c-a79e-11eb-bcbc-0242ac130002');
+insert into bag
+values ('8ba50dc4-a79f-11eb-bcbc-0242ac130002', '602f347c-a79e-11eb-bcbc-0242ac130003');
