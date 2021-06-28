@@ -15,8 +15,6 @@ public interface CartRepository extends JpaRepository<Cart, UUID> {
 
     Optional<Cart> findCartByUserId(UUID userId);
 
-
-
     @Transactional
     @Modifying
     @Query(value="delete from cart_item where item_id = :itemId and cart_id = :cartId", nativeQuery = true)

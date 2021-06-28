@@ -1,9 +1,11 @@
 package com.codex.test_task.service;
 
+import com.codex.test_task.dto.ItemDto;
 import com.codex.test_task.entity.Cart;
 import com.codex.test_task.entity.Item;
 import com.codex.test_task.entity.User;
 import com.codex.test_task.exception.DBNotFoundException;
+import com.codex.test_task.mapper.ItemMapper;
 import com.codex.test_task.repository.CartRepository;
 import com.codex.test_task.repository.ItemRepository;
 import com.codex.test_task.repository.UserRepository;
@@ -23,6 +25,19 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
+    private final ItemMapper itemMapper;
+
+    @Override
+    public List<ItemDto> buyItems(String userEmail) {
+        User user = userRepository.findUserByEmail(userEmail)
+                .orElseThrow(() -> new DBNotFoundException(NOT_FOUND_MESSAGE));
+        Cart cart = cartRepository.findCartByUserId(user.getId())
+                .orElseThrow(() -> new DBNotFoundException(NOT_FOUND_MESSAGE));
+
+        List<Item> items = itemRepository.findItemsByCartId(cart.getId());
+        cartRepository.delete(cart);
+        return itemMapper.toDto(items);
+    }
 
     @Override
     public boolean addToCart(UUID itemId, String userEmail) {
