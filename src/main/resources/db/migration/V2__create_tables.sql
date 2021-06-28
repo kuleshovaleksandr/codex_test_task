@@ -31,7 +31,14 @@ create table item_tag
 
 create table cart
 (
-    user_id  uuid not null,
+    id  uuid not null,
+    user_id uuid not null,
+    primary key (id)
+);
+
+create table cart_item
+(
+    cart_id  uuid not null,
     item_id uuid not null
 );
 
@@ -44,5 +51,9 @@ alter table item_tag
 alter table cart
     add constraint FK_user_id_user foreign key (user_id) references users;
 
-alter table cart
-    add constraint FK_item_id_item_bag foreign key (item_id) references item;
+alter table cart_item
+    add constraint FK_cart_id_cart foreign key (cart_id) references cart;
+
+alter table cart_item
+    add constraint FK_item_id_cart_item foreign key (item_id) references item;
+

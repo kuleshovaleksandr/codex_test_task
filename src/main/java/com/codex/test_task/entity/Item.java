@@ -26,9 +26,9 @@ public class Item extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name="tag_id"))
     private List<Tag> tags;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="cart",
+    @ManyToMany
+    @JoinTable(name="cart_item",
             joinColumns = @JoinColumn(name="item_id"),
-            inverseJoinColumns = @JoinColumn(name="user_id"))
-    private List<User> users;
+            inverseJoinColumns = @JoinColumn(name="cart_id"))
+    private List<Cart> carts;
 }

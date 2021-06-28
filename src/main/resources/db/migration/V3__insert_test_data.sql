@@ -74,8 +74,19 @@ insert into users
 values ('8ba50dc4-a79f-11eb-bcbc-0242ac130005', 'admin2', '$2y$12$xexAfRm4EkszF2Aq0bDOAOobvI2nFmkbJfJ9pHE37YYAjDhJzdf0O', 'admin2@gmail.com', 'ADMIN');
 
 insert into cart
-values ('8ba50dc4-a79f-11eb-bcbc-0242ac130001', '602f347c-a79e-11eb-bcbc-0242ac130001');
+values ('3fa85f64-5717-4562-b3fc-2c963f66a001', '8ba50dc4-a79f-11eb-bcbc-0242ac130001');
 insert into cart
-values ('8ba50dc4-a79f-11eb-bcbc-0242ac130001', '602f347c-a79e-11eb-bcbc-0242ac130002');
+values ('3fa85f64-5717-4562-b3fc-2c963f66a002', '8ba50dc4-a79f-11eb-bcbc-0242ac130002');
 insert into cart
-values ('8ba50dc4-a79f-11eb-bcbc-0242ac130002', '602f347c-a79e-11eb-bcbc-0242ac130003');
+values ('3fa85f64-5717-4562-b3fc-2c963f66a003', '8ba50dc4-a79f-11eb-bcbc-0242ac130003');
+
+insert into cart_item
+values ('3fa85f64-5717-4562-b3fc-2c963f66a001', '602f347c-a79e-11eb-bcbc-0242ac130001');
+insert into cart_item
+values ('3fa85f64-5717-4562-b3fc-2c963f66a001', '602f347c-a79e-11eb-bcbc-0242ac130002');
+insert into cart_item
+values ('3fa85f64-5717-4562-b3fc-2c963f66a002', '602f347c-a79e-11eb-bcbc-0242ac130003');
+insert into cart_item
+values ('3fa85f64-5717-4562-b3fc-2c963f66a003', '602f347c-a79e-11eb-bcbc-0242ac130001');
+insert into cart_item
+values ('3fa85f64-5717-4562-b3fc-2c963f66a003', '602f347c-a79e-11eb-bcbc-0242ac130004');
