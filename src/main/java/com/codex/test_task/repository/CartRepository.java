@@ -1,7 +1,6 @@
 package com.codex.test_task.repository;
 
 import com.codex.test_task.entity.Cart;
-import com.codex.test_task.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,6 +22,6 @@ public interface CartRepository extends JpaRepository<Cart, UUID> {
 
     @Transactional
     @Modifying
-    @Query(value="insert into cart_item values item_id = :itemId and cart_id = :cartId", nativeQuery = true)
+    @Query(value="insert into cart_item values (:cartId, :itemId)", nativeQuery = true)
     void saveInCart(UUID itemId, UUID cartId);
 }
