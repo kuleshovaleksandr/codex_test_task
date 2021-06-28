@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +35,7 @@ public class CartServiceImpl implements CartService {
         Optional<Cart> optionalCart = cartRepository.findCartByUserId(user.getId());
 
         if(!optionalCart.isPresent()) {
-            List<Item> items = new ArrayList<>();
+            Set<Item> items = new HashSet<>();
             items.add(item);
             cartRepository.save(new Cart(user, items));
         } else {

@@ -52,8 +52,4 @@ alter table cart
     add constraint FK_user_id_user foreign key (user_id) references users;
 
 alter table cart_item
-    add constraint FK_cart_id_cart foreign key (cart_id) references cart;
-
-alter table cart_item
-    add constraint FK_item_id_cart_item foreign key (item_id) references item;
-
+    add constraint cart_item_pkey primary key (cart_id, item_id);

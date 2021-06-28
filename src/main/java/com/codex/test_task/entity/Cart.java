@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "cart")
@@ -24,5 +24,5 @@ public class Cart extends AbstractEntity {
     @JoinTable(name="cart_item",
             joinColumns = @JoinColumn(name="cart_id"),
             inverseJoinColumns = @JoinColumn(name="item_id"))
-    private List<Item> items;
+    private Set<Item> items;
 }
