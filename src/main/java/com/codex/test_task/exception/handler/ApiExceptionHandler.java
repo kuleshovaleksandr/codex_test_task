@@ -1,6 +1,5 @@
 package com.codex.test_task.exception.handler;
 
-import com.codex.test_task.exception.DBExecutionException;
 import com.codex.test_task.exception.DBNotFoundException;
 import com.codex.test_task.exception.ExceptionDto;
 import org.springframework.http.HttpStatus;
@@ -15,16 +14,6 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(value={DBNotFoundException.class})
     public ResponseEntity<Object> handleDBNotFoundException(DBNotFoundException e) {
-        ExceptionDto exceptionDto = new ExceptionDto(
-                e.getMessage(),
-                e, HttpStatus.NOT_FOUND,
-                LocalDateTime.now()
-        );
-        return new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(value={DBExecutionException.class})
-    public ResponseEntity<Object> handleDBExecutionException(DBExecutionException e) {
         ExceptionDto exceptionDto = new ExceptionDto(
                 e.getMessage(),
                 e, HttpStatus.NOT_FOUND,
