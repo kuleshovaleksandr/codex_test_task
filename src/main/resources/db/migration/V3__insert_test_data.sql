@@ -63,19 +63,19 @@ values ('602f347c-a79e-11eb-bcbc-0242ac130005', '7889d51e-a79d-11eb-bcbc-0242ac1
 
 
 insert into users
-values ('8ba50dc4-a79f-11eb-bcbc-0242ac130001', 'Ivan', '111', 'ivan@gmail.com', 'USER');
+values ('8ba50dc4-a79f-11eb-bcbc-0242ac130001', 'user1', '$2y$12$A0ecnCOnBHT9p0Hnp6GkAe6WIaddNNcJDNvHoE3jFbgUimkdi.3PW', 'user1@gmail.com', 'USER');
 insert into users
-values ('8ba50dc4-a79f-11eb-bcbc-0242ac130002', 'Kate', '111', 'kate@gmail.com', 'USER');
+values ('8ba50dc4-a79f-11eb-bcbc-0242ac130002', 'user2', '$2y$12$A0ecnCOnBHT9p0Hnp6GkAe6WIaddNNcJDNvHoE3jFbgUimkdi.3PW', 'user2@gmail.com', 'USER');
 insert into users
-values ('8ba50dc4-a79f-11eb-bcbc-0242ac130003', 'Dima', '111', 'Dima@gmail.com', 'USER');
+values ('8ba50dc4-a79f-11eb-bcbc-0242ac130003', 'user3', '$2y$12$A0ecnCOnBHT9p0Hnp6GkAe6WIaddNNcJDNvHoE3jFbgUimkdi.3PW', 'user3@gmail.com', 'USER');
 insert into users
-values ('8ba50dc4-a79f-11eb-bcbc-0242ac130004', 'admin1', '111', 'admin1@gmail.com', 'ADMIN');
+values ('8ba50dc4-a79f-11eb-bcbc-0242ac130004', 'admin1', '$2y$12$xexAfRm4EkszF2Aq0bDOAOobvI2nFmkbJfJ9pHE37YYAjDhJzdf0O', 'admin1@gmail.com', 'ADMIN');
 insert into users
-values ('8ba50dc4-a79f-11eb-bcbc-0242ac130005', 'admin2', '111', 'admin2@gmail.com', 'ADMIN');
+values ('8ba50dc4-a79f-11eb-bcbc-0242ac130005', 'admin2', '$2y$12$xexAfRm4EkszF2Aq0bDOAOobvI2nFmkbJfJ9pHE37YYAjDhJzdf0O', 'admin2@gmail.com', 'ADMIN');
 
-insert into bag
+insert into cart
 values ('8ba50dc4-a79f-11eb-bcbc-0242ac130001', '602f347c-a79e-11eb-bcbc-0242ac130001');
-insert into bag
+insert into cart
 values ('8ba50dc4-a79f-11eb-bcbc-0242ac130001', '602f347c-a79e-11eb-bcbc-0242ac130002');
-insert into bag
+insert into cart
 values ('8ba50dc4-a79f-11eb-bcbc-0242ac130002', '602f347c-a79e-11eb-bcbc-0242ac130003');
