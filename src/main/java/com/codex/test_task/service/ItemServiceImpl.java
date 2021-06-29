@@ -53,10 +53,7 @@ public class ItemServiceImpl implements ItemService {
                 .orElseThrow(() -> new DBNotFoundException(NOT_FOUND_MESSAGE));
 
         List<Item> items = itemRepository.findItemsInCartsByItemId(itemId);
-        System.out.println("items is " + items + " and size is = " + items.size());
-        for(Item obj: items) {
-            System.out.println(obj);
-        }
+
         if(items == null || items.size() == 0) {
             item.setName(newItemDto.getName());
             item.setDescription(newItemDto.getDescription());
