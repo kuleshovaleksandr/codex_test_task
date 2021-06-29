@@ -3,15 +3,18 @@ package com.codex.test_task.service;
 import com.codex.test_task.dto.ItemDto;
 import com.codex.test_task.dto.NewItemDto;
 import com.codex.test_task.entity.Item;
+import com.codex.test_task.entity.User;
 import com.codex.test_task.exception.DBNotFoundException;
 import com.codex.test_task.exception.ItemExistsInCartException;
 import com.codex.test_task.mapper.ItemMapper;
 import com.codex.test_task.mapper.NewItemMapper;
 import com.codex.test_task.repository.ItemRepository;
+import com.codex.test_task.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,7 +29,10 @@ public class ItemServiceImpl implements ItemService {
     private final ItemMapper itemMapper;
     private final NewItemMapper newItemMapper;
 
+    private final UserRepository userRepository;
     private final ItemRepository itemRepository;
+
+    private final MailSender mailSender;
 
     @Override
     public List<ItemDto> getAllItems() {
@@ -73,6 +79,16 @@ public class ItemServiceImpl implements ItemService {
         item.setDescription(newItemDto.getDescription());
 
         Item updatedItem = itemRepository.save(item);
+
+        List<User> users = userRepository.findUsersByItemIdInCart(itemId);
+
+        if(users != null || users.size() >= 1) {
+            List<String> emails = new ArrayList<>();
+            for(User user : users) {
+                emails.add(user.getEmail());
+            }
+            mailSender.sendEmailIfChangedItemInCart(emails);
+        }
         return itemMapper.toDto(updatedItem);
     }
 

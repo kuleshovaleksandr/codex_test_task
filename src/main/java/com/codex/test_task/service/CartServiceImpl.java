@@ -26,7 +26,7 @@ public class CartServiceImpl implements CartService {
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
-//    private final MailSender mailSender;
+    private final MailSender mailSender;
 
     @Override
     public List<ItemDto> buyItems(String userEmail) {
@@ -37,7 +37,7 @@ public class CartServiceImpl implements CartService {
 
         List<Item> items = itemRepository.findItemsByCartId(cart.getId());
 
-//        mailSender.sendEmailAfterBuying(user.getEmail(), items);
+        mailSender.sendEmailAfterBuying(user.getEmail(), items);
 
         cartRepository.delete(cart);
         return itemMapper.toDto(items);
