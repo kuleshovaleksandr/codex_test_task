@@ -4,6 +4,7 @@ import com.codex.test_task.dto.ItemDto;
 import com.codex.test_task.dto.NewItemDto;
 import com.codex.test_task.entity.Item;
 import com.codex.test_task.exception.DBNotFoundException;
+import com.codex.test_task.exception.ItemExistsInCartException;
 import com.codex.test_task.mapper.ItemMapper;
 import com.codex.test_task.mapper.NewItemMapper;
 import com.codex.test_task.repository.ItemRepository;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class ItemServiceImpl implements ItemService {
 
     private final String NOT_FOUND_MESSAGE = "There is no such element";
+    private final String ITEM_IN_CART_MESSAGE = "You can't change/update the item because it is in the user's shopping cart";
 
     private final ItemMapper itemMapper;
     private final NewItemMapper newItemMapper;
@@ -46,15 +48,23 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDto updateItem(UUID id, NewItemDto newItemDto) {
-        Item item = itemRepository.findById(id)
+    public ItemDto updateItem(UUID itemId, NewItemDto newItemDto) {
+        Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new DBNotFoundException(NOT_FOUND_MESSAGE));
 
-        item.setName(newItemDto.getName());
-        item.setDescription(newItemDto.getDescription());
-
-        Item updatedItem = itemRepository.save(item);
-        return itemMapper.toDto(updatedItem);
+        List<Item> items = itemRepository.findItemsInCartsByItemId(itemId);
+        System.out.println("items is " + items + " and size is = " + items.size());
+        for(Item obj: items) {
+            System.out.println(obj);
+        }
+        if(items == null || items.size() == 0) {
+            item.setName(newItemDto.getName());
+            item.setDescription(newItemDto.getDescription());
+            Item updatedItem = itemRepository.save(item);
+            return itemMapper.toDto(updatedItem);
+        } else {
+            throw new ItemExistsInCartException(ITEM_IN_CART_MESSAGE);
+        }
     }
 
     @Override
