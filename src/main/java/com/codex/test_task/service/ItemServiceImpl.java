@@ -14,9 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +36,28 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDto> getAllItems() {
         List<Item> items = itemRepository.findAll();
+        return itemMapper.toDto(items);
+    }
+
+    @Override
+    public List<ItemDto> getAllItemsByDescription(String description) {
+        List<Item> items = itemRepository.findItemsByDescription(description);
+        return itemMapper.toDto(items);
+    }
+
+    @Override
+    public List<ItemDto> getAllItemsByTagName(String tagName) {
+        List<Item> items = itemRepository.findItemsByTagName(tagName);
+        return itemMapper.toDto(items);
+    }
+
+    @Override
+    public List<ItemDto> getAllItemsWithFilter(String tagName, String description) {
+        List<Item> itemsByTagName = itemRepository.findItemsByTagName(tagName);
+        List<Item> itemsByDescription = itemRepository.findItemsByDescription(description);
+        List<Item> items = itemsByTagName.stream()
+                .filter(itemsByDescription::contains)
+                .collect(Collectors.toList());
         return itemMapper.toDto(items);
     }
 

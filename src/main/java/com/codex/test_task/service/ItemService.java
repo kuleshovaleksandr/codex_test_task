@@ -10,6 +10,12 @@ public interface ItemService {
 
     List<ItemDto> getAllItems();
 
+    List<ItemDto> getAllItemsByDescription(String description);
+
+    List<ItemDto> getAllItemsByTagName(String tagName);
+
+    List<ItemDto> getAllItemsWithFilter(String tagName, String description);
+
     ItemDto getItemById(UUID id);
 
     ItemDto saveItem(NewItemDto newItemDto);

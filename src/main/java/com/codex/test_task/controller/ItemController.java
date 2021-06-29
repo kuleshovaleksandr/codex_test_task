@@ -22,11 +22,20 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @ApiOperation("Method to get all items")
-    @GetMapping
+    @ApiOperation("Method to get all items with filter")
+    @GetMapping("/")
     @PreAuthorize("hasAuthority('item:read')")
-    public ResponseEntity<List<ItemDto>> getItems() {
-        return new ResponseEntity<>(itemService.getAllItems(), HttpStatus.OK);
+    public ResponseEntity<List<ItemDto>> getItemsWithFilter(@RequestParam(value = "tag", required = false) String tag,
+                                                            @RequestParam(value = "description", required = false) String description) {
+        if(tag != null && description == null) {
+            return new ResponseEntity<>(itemService.getAllItemsByTagName(tag), HttpStatus.OK);
+        } else if(description != null && tag == null) {
+            return new ResponseEntity<>(itemService.getAllItemsByDescription(description), HttpStatus.OK);
+        } else if(tag != null && description != null) {
+            return new ResponseEntity<>(itemService.getAllItemsWithFilter(tag, description), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(itemService.getAllItems(), HttpStatus.OK);
+        }
     }
 
     @ApiOperation("Method to get item by Id")

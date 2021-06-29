@@ -23,4 +23,14 @@ public interface ItemRepository extends JpaRepository<Item, UUID> {
     @Modifying
     @Query(value="select * from item where id in (select item_id from cart_item where item_id = :itemId)", nativeQuery = true)
     List<Item> findItemsInCartsByItemId(UUID itemId);
+
+    @Transactional
+    @Modifying
+    @Query(value="select * from item where id in (select item_id from item_tag where tag_id in (select id from tag where name = :tagName))", nativeQuery = true)
+    List<Item> findItemsByTagName(String tagName);
+
+    @Transactional
+    @Modifying
+    @Query(value="select * from item where description = :description", nativeQuery = true)
+    List<Item> findItemsByDescription(String description);
 }
