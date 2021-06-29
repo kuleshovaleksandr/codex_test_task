@@ -9,6 +9,7 @@ import java.util.List;
 @Table(name="item")
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Item extends AbstractEntity {
