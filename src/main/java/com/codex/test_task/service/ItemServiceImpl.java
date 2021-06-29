@@ -65,6 +65,18 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public ItemDto forceUpdateItem(UUID itemId, NewItemDto newItemDto) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new DBNotFoundException(NOT_FOUND_MESSAGE));
+
+        item.setName(newItemDto.getName());
+        item.setDescription(newItemDto.getDescription());
+
+        Item updatedItem = itemRepository.save(item);
+        return itemMapper.toDto(updatedItem);
+    }
+
+    @Override
     public boolean deleteItem(UUID id) {
         if(!itemRepository.existsById(id)) {
             throw new DBNotFoundException(NOT_FOUND_MESSAGE);

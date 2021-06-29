@@ -16,5 +16,7 @@ public interface ItemService {
 
     ItemDto updateItem(UUID id, NewItemDto newItemDto);
 
+    ItemDto forceUpdateItem(UUID id, NewItemDto newItemDto);
+
     boolean deleteItem(UUID id);
 }

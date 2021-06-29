@@ -57,4 +57,12 @@ public class ItemController {
     public ResponseEntity<?> deleteItem(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(itemService.deleteItem(id), HttpStatus.OK);
     }
+
+    @ApiOperation("Method to force update an item if it is in user's cart")
+    @PutMapping("/forceUpdate/{id}")
+    @PreAuthorize("hasAuthority('item:write')")
+    public ResponseEntity<ItemDto> forceUpdateItem(@PathVariable("id") UUID id,
+                                            @RequestBody NewItemDto newItemDto) {
+        return new ResponseEntity<>(itemService.forceUpdateItem(id, newItemDto), HttpStatus.OK);
+    }
 }
